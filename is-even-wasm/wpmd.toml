@@ -1,0 +1,6 @@
+#:schema https://raw.githubusercontent.com/wpmdex/schemas/main/wpmd.v1.json
+
+name = "is-even-wasm"
+version = "0.1.0"
+wasm = "pkg/is_even_wasm_bg.wasm"
+bindings = ["pkg/is_even_wasm.d.ts", "python/is_even_wasm.pyi", "include/is_even.h"]
