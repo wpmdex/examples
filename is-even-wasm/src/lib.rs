@@ -1,32 +1,29 @@
-use wasm_bindgen::prelude::*;
-
-#[wasm_bindgen]
-pub fn is_even(n: i32) -> bool {
+fn is_even_impl(n: i32) -> bool {
     n % 2 == 0
 }
 
-#[wasm_bindgen]
-pub fn is_odd(n: i32) -> bool {
-    !is_even(n)
-}
+// WASM / JavaScript bindings — compiled only on wasm32
+#[cfg(target_arch = "wasm32")]
+mod wasm_bindings;
+
+// C FFI — excluded on wasm32 to avoid export name collision with wasm_bindgen
+#[cfg(not(target_arch = "wasm32"))]
+pub mod ffi;
+
+// Python bindings — opt-in via --features python
+#[cfg(feature = "python")]
+mod python_bindings;
 
 #[cfg(test)]
 mod tests {
-    use super::*;
+    use super::is_even_impl;
 
     #[test]
-    fn test_is_even() {
-        assert!(is_even(0));
-        assert!(is_even(2));
-        assert!(is_even(-4));
-        assert!(!is_even(1));
-        assert!(!is_even(7));
-    }
-
-    #[test]
-    fn test_is_odd() {
-        assert!(is_odd(1));
-        assert!(is_odd(3));
-        assert!(!is_odd(2));
+    fn even() {
+        assert!(is_even_impl(0));
+        assert!(is_even_impl(2));
+        assert!(is_even_impl(-4));
+        assert!(!is_even_impl(1));
+        assert!(!is_even_impl(7));
     }
 }

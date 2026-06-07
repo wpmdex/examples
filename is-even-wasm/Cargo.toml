@@ -6,8 +6,18 @@ edition = "2021"
 [lib]
 crate-type = ["cdylib", "rlib"]
 
+[features]
+python = ["pyo3/extension-module"]
+
 [dependencies]
+pyo3 = { version = "0.22", optional = true }
+
+# wasm-bindgen only needed when targeting wasm32
+[target.'cfg(target_arch = "wasm32")'.dependencies]
 wasm-bindgen = "0.2"
+
+[build-dependencies]
+cbindgen = "0.27"
 
 [profile.release]
 opt-level = "s"
