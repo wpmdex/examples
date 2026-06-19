@@ -6,8 +6,14 @@
 #include <stdint.h>
 #include <stdlib.h>
 
+/**
+ * Returns `true` when `n` is even. C ABI export.
+ */
 bool is_even(int32_t n);
 
+/**
+ * Returns `true` when `n` is odd. C ABI export.
+ */
 bool is_odd(int32_t n);
 
 #endif  /* IS_EVEN_H */
