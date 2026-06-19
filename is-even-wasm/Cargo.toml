@@ -33,3 +33,7 @@ missing_docs = "warn"
 # Flag functions that could be `const fn`, enabling compile-time evaluation
 # and `const`/`static` use at call sites. See issue for rationale.
 missing_const_for_fn = "warn"
+# Flag public functions whose result is worth keeping as `#[must_use]`
+# candidates. Every binding here is a pure, value-returning function, so
+# silently discarding the result is almost always a bug. See issue for rationale.
+must_use_candidate = "warn"
