@@ -1,3 +1,10 @@
+//! Parity checks (`is_even` / `is_odd`) exposed across multiple ecosystems.
+//!
+//! The same pure implementation is re-exported through three sets of bindings,
+//! selected at compile time: a C FFI surface (default), WebAssembly bindings
+//! (`wasm32` targets), and Python bindings (`--features python`).
+
+/// Core parity check shared by every binding: returns `true` when `n` is even.
 const fn is_even_impl(n: i32) -> bool {
     n % 2 == 0
 }
@@ -6,6 +13,7 @@ const fn is_even_impl(n: i32) -> bool {
 #[cfg(target_arch = "wasm32")]
 mod wasm_bindings;
 
+/// C FFI surface exposing `is_even` / `is_odd` as `extern "C"` functions.
 // C FFI — excluded on wasm32 to avoid export name collision with wasm_bindgen
 #[cfg(not(target_arch = "wasm32"))]
 pub mod ffi;

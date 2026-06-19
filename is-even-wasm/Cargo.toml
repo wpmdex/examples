@@ -22,6 +22,13 @@ cbindgen = "0.27"
 [profile.release]
 opt-level = "s"
 
+[lints.rust]
+# Require documentation on every publicly reachable item (crate root, public
+# modules, public functions). This crate exposes a public multi-language API
+# (C FFI, WebAssembly, Python), so the exported surface should stay self
+# describing in `cargo doc` and the generated C header. See issue for rationale.
+missing_docs = "warn"
+
 [lints.clippy]
 # Flag functions that could be `const fn`, enabling compile-time evaluation
 # and `const`/`static` use at call sites. See issue for rationale.

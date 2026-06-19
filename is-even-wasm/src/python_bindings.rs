@@ -1,3 +1,5 @@
+//! Python bindings: parity checks exposed as a pyo3 extension module.
+
 use pyo3::prelude::*;
 use super::is_even_impl;
 
@@ -11,6 +13,7 @@ fn is_odd(n: i32) -> bool {
     !is_even_impl(n)
 }
 
+/// Registers `is_even` / `is_odd` on the Python `is_even_wasm` module.
 #[pymodule]
 pub fn is_even_wasm(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(is_even, m)?)?;
