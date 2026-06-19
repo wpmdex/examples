@@ -37,3 +37,10 @@ missing_const_for_fn = "warn"
 # candidates. Every binding here is a pure, value-returning function, so
 # silently discarding the result is almost always a bug. See issue for rationale.
 must_use_candidate = "warn"
+# Forbid `.unwrap()`. This crate's public surface is exported across FFI
+# boundaries — C ABI (`extern "C"`), WebAssembly, and Python (pyo3). A panic
+# unwinding across an `extern "C"` boundary is undefined behavior, and on
+# wasm it aborts the whole module. The implementation is currently panic-free;
+# this denial keeps it that way by forcing explicit error handling instead of
+# `.unwrap()`. See issue for rationale.
+unwrap_used = "deny"

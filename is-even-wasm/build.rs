@@ -7,8 +7,10 @@ fn main() {
         return;
     }
 
-    let crate_dir = std::env::var("CARGO_MANIFEST_DIR").unwrap();
-    std::fs::create_dir_all(format!("{crate_dir}/include")).unwrap();
+    let crate_dir = std::env::var("CARGO_MANIFEST_DIR")
+        .expect("CARGO_MANIFEST_DIR is always set by cargo for build scripts");
+    std::fs::create_dir_all(format!("{crate_dir}/include"))
+        .expect("failed to create include/ output directory for the generated C header");
 
     // Parse ffi.rs directly so cbindgen finds the extern "C" functions
     // without needing to expand cfg-gated module declarations in lib.rs.
