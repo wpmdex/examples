@@ -1,4 +1,4 @@
-fn is_even_impl(n: i32) -> bool {
+const fn is_even_impl(n: i32) -> bool {
     n % 2 == 0
 }
 
