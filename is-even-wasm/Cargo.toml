@@ -42,3 +42,8 @@ must_use_candidate = "warn"
 # crate exposes a documented multi-language public API, so its prose should
 # render cleanly everywhere. See issue for rationale.
 doc_markdown = "warn"
+# Flag `as` casts that may silently truncate an integer to a narrower type.
+# This crate operates on integer inputs and re-exports them across C, WASM and
+# Python ABIs, where width mismatches are easy to introduce; guard against
+# silently lossy casts as the numeric API grows. See issue for rationale.
+cast_possible_truncation = "warn"
