@@ -37,6 +37,11 @@ missing_const_for_fn = "warn"
 # candidates. Every binding here is a pure, value-returning function, so
 # silently discarding the result is almost always a bug. See issue for rationale.
 must_use_candidate = "warn"
+# Require code-like identifiers in doc comments to be wrapped in backticks so
+# the rendered `cargo doc` output and the generated C header stay correct. This
+# crate exposes a documented multi-language public API, so its prose should
+# render cleanly everywhere. See issue for rationale.
+doc_markdown = "warn"
 # Flag `as` casts that may silently truncate an integer to a narrower type.
 # This crate operates on integer inputs and re-exports them across C, WASM and
 # Python ABIs, where width mismatches are easy to introduce; guard against
