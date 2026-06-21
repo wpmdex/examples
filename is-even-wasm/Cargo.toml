@@ -44,3 +44,8 @@ must_use_candidate = "warn"
 # this denial keeps it that way by forcing explicit error handling instead of
 # `.unwrap()`. See issue for rationale.
 unwrap_used = "deny"
+# Flag `as` casts that may silently truncate an integer to a narrower type.
+# This crate operates on integer inputs and re-exports them across C, WASM and
+# Python ABIs, where width mismatches are easy to introduce; guard against
+# silently lossy casts as the numeric API grows. See issue for rationale.
+cast_possible_truncation = "warn"
